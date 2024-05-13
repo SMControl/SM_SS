@@ -26,4 +26,16 @@ $trigger = New-ScheduledTaskTrigger -AtStartup
 $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 
 # Define settings to ensure the task runs indefinitely and restarts if it fails
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -RestartCount 9999 -RestartInterval (
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -RestartCount 9999 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit (New-TimeSpan -Days 9999)
+
+# Register the scheduled task
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings
+
+Write-Output "The scheduled task '$taskName' has been created successfully."
+
+################################
+# Part 4 - Start the Scheduled Task
+################################
+Start-ScheduledTask -TaskName $taskName
+
+Write-Output "The scheduled task '$taskName' has been started."
