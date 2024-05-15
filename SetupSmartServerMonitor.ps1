@@ -21,6 +21,22 @@ if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
 }
 
 ################################
+# Part 3 - Create the Monitoring Script (Hardcoded)
+################################
+try {
+  # Create the monitoring script file
+  New-Item -Path "C:\SmartServer\MonitorSmartServer.ps1" -ItemType File -Force
+  
+  # Set the content of the monitoring script
+  Set-Content -Path "C:\SmartServer\MonitorSmartServer.ps1" -Value $monitoringScriptContent
+  
+  Write-Output "Monitoring script 'C:\SmartServer\MonitorSmartServer.ps1' created successfully."
+} catch {
+  Write-Error "Error creating monitoring script: $($_.Exception.Message)"
+  exit
+}
+
+################################
 # Part 4 - Create Scheduled Task (Highest Privileges)
 ################################
 # Define the action to run the monitoring script (hardcoded path)
