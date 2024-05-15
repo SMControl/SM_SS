@@ -11,8 +11,8 @@ New-Item -ItemType Directory -Path (Split-Path $destinationPath) -Force | Out-Nu
 # Create Scheduled Task
 $trigger = New-ScheduledTaskTrigger -AtStartup
 $action = New-ScheduledTaskAction -Execute "C:\SmartServer\MonitorSmartServer.exe" -WorkingDirectory "C:\SmartServer"
-$settings = New-ScheduledTaskSettingsSet -RunAsCurrentUser
+$settings = New-ScheduledTaskSettingsSet -RunAsCurrentUser -Hidden
 
 Register-ScheduledTask -TaskName "SP_Monitor_SmartServer" -Trigger $trigger -Action $action -Settings $settings
 
-Write-Host "Task 'SP_Monitor_SmartServer' created and configured for system startup!"
+Write-Host "Task 'SP_Monitor_SmartServer' created and configured for system startup (hidden)!"
