@@ -60,3 +60,8 @@ $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoi
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings
 
 Write-Output "The scheduled task '$taskName' has been created successfully and will run at logon."
+
+# Start Task
+Write-Output "Task Started"
+Start-ScheduledTask -TaskName "SP_SmartServer_Monitor" -ErrorAction SilentlyContinue
+
