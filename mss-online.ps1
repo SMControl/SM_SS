@@ -1,5 +1,5 @@
 #########################################
-# Section 1: Download
+# Section 1: Downloads
 #########################################
 
 # Download MonitorSmartServer.exe
@@ -19,3 +19,11 @@ $action = New-ScheduledTaskAction -Execute "C:\SmartServer\MonitorSmartServer.ex
 Register-ScheduledTask -TaskName "SP_Monitor_SmartServer" -Trigger $trigger -Action $action
 
 Write-Host "Task 'SP_Monitor_SmartServer' created and configured to run at user logon!"
+
+#########################################
+# Section 3: Run the Scheduled Task
+#########################################
+
+# Run the newly created scheduled task
+Start-ScheduledTask -TaskName "SP_Monitor_SmartServer"
+Write-Host "Scheduled task 'SP_Monitor_SmartServer' has been started!"
