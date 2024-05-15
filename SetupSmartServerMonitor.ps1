@@ -46,7 +46,7 @@ $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfil
 $trigger = New-ScheduledTaskTrigger -AtLogon
 
 # Define the principal to run with the current user's credentials
-$principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel BelowNormal
+$principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
 
 # Define settings 
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -DontStopOnIdleEnd -MultipleInstances IgnoreNew
