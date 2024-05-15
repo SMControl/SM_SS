@@ -9,10 +9,8 @@ New-Item -ItemType Directory -Path (Split-Path $destinationPath) -Force|Out-Null
 (New-Object System.Net.WebClient).DownloadFile($downloadUrl,$destinationPath)
 
 # Create Scheduled Task
-$trigger=New-ScheduledTaskTrigger -AtStartup
+$trigger=New-ScheduledTaskTrigger -AtLogon
 $action=New-ScheduledTaskAction -Execute "C:\SmartServer\MonitorSmartServer.exe" -WorkingDirectory "C:\SmartServer"
-$currentUser=$env:USERNAME
-$settings=New-ScheduledTaskSettingsSet -RunOnlyIfLoggedOn -DontStopIfGoingOnBatteries -StartWhenAvailable -DontStopIfGoingOnBatteries -WakeToRun -RunOnlyIfNetworkAvailable
-Register-ScheduledTask -TaskName "SP_Monitor_SmartServer" -Trigger $trigger -Action $action -User $currentUser -Settings $settings
+Register-ScheduledTask -TaskName "SP_Monitor_SmartServer" -Trigger $trigger -Action $action
 
 Write-Host "Task 'SP_Monitor_SmartServer' created and configured for system startup!"
