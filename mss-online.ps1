@@ -1,9 +1,17 @@
+#########################################
+# Section 1: Download
+#########################################
+
 # Download MonitorSmartServer.exe
 $downloadUrl = "https://raw.githubusercontent.com/SMControl/SM_SS/main/MonitorSmartServer.exe"
 $destinationPath = "C:\SmartServer\MonitorSmartServer.exe"
 
 # Download the file
 (New-Object System.Net.WebClient).DownloadFile($downloadUrl, $destinationPath)
+
+#########################################
+# Section 2: Task Creation
+#########################################
 
 # Create Scheduled Task
 $trigger = New-ScheduledTaskTrigger -AtLogon
