@@ -37,7 +37,7 @@ try {
 }
 
 ################################
-# Part 4 - Create Scheduled Task (Highest Privileges)
+# Part 4 - Create Scheduled Task (Current User)
 ################################
 # Define the action to run the monitoring script (hardcoded path)
 $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfile -WindowStyle Hidden -File C:\SmartServer\MonitorSmartServer.ps1"
@@ -45,16 +45,16 @@ $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfil
 # Define the trigger to run the task at logon
 $trigger = New-ScheduledTaskTrigger -AtLogon
 
-# Define the principal to run with highest privileges (requires admin)
-$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+# Define the principal to run with the current user's credentials
+$principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel BelowNormal
 
-# Define settings to ensure the task runs indefinitely and only one instance runs at a time
+# Define settings 
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -DontStopOnIdleEnd -MultipleInstances IgnoreNew
 
-# Register the scheduled task (requires admin)
+# Register the scheduled task (requires admin to create the task)
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings
 
-# Start the scheduled task (optional, requires admin)
+# Start the scheduled task (optional)
 Start-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 
-Write-Output "The scheduled task '$taskName' has been created successfully and will run at logon with highest privileges. (Task also started, if successful)"
+Write-Output "The scheduled task '$taskName' has been created successfully and will run at logon with the current user's credentials. (Task also started, if successful)"
