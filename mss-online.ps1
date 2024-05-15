@@ -8,14 +8,11 @@ New-Item -ItemType Directory -Path (Split-Path $destinationPath) -Force | Out-Nu
 # Download the file
 (New-Object System.Net.WebClient).DownloadFile($downloadUrl, $destinationPath)
 
-# Create Scheduled Task (remaining sections unchanged)
+# Create Scheduled Task
 $trigger = New-ScheduledTaskTrigger -AtStartup
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\SmartServer\MonitorSmartServer.exe"
-$settings = New-ScheduledTaskSettingsSet -RunAsSystem
+$action = New-ScheduledTaskAction -Execute "C:\SmartServer\MonitorSmartServer.exe" -WorkingDirectory "C:\SmartServer"
+$settings = New-ScheduledTaskSettingsSet -RunAsCurrentUser
 
 Register-ScheduledTask -TaskName "SP_Monitor_SmartServer" -Trigger $trigger -Action $action -Settings $settings
-
-# Run the Task (Optional - not recommended)
-Start-ScheduledTask -TaskName "SP_Monitor_SmartServer"
 
 Write-Host "Task 'SP_Monitor_SmartServer' created and configured for system startup!"
