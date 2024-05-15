@@ -1,10 +1,12 @@
 # SmartServer Monitoring Tool
 
-## WARNING: Still in testing
+**⚠️ Warning: This tool is still in testing phase. Use with caution.**
 
 ## Overview
 
 The SmartServer Monitoring Tool is a PowerShell script designed to automate the download and execution of the SmartServer monitoring executable. It also creates a scheduled task to ensure the monitoring tool runs automatically at user logon.
+
+The tool expects the existance of path "C:\SmartServer"
 
 ## Features
 
