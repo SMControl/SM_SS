@@ -1,6 +1,8 @@
 # SmartServer Setup and Monitor
 
-Tool to create a scheduled task that runs a batch script that keeps SmartServer running.
+**This is a Public Repository**
+
+Tool to create a scheduled task that runs a batch script to keep SmartServer running.
 
 ## Requirements
 
@@ -9,4 +11,4 @@ Tool to create a scheduled task that runs a batch script that keeps SmartServer 
 
 ## Usage
 
-Run Exe on target machine.
+Run the executable on the target machine.
