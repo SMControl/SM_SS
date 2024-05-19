@@ -1,15 +1,12 @@
-# SmartServer Monitoring Tool
+# SmartServer Setup and Monitor
 
-**⚠️ Warning: This tool is still in testing phase. Use with caution.**
+Tool to create a scheduled task that runs a batch script that keeps SmartServer running.
 
-## Overview
-Downloads MonitorSmartServer.exe onto target and sets up a Scheduled Task to run it at startup.
+## Requirements
 
-MonitorSmartServer.exe checks every 10 seconds to see if SmartServer.exe is running and launches it if its not.
+- Windows Username must be "Engineer"
+- Directory `C:\SmartServer` must exist.
 
 ## Usage
 
-To use the SmartServer Monitoring Tool, paste this command into an elevated PowerShell terminal:
-
-```powershell
-irm "https://raw.githubusercontent.com/SMControl/SM_SS/main/mss-online.ps1" | iex
+Run Exe on target machine.
